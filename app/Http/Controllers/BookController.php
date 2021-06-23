@@ -86,19 +86,21 @@ class BookController extends API
    
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|unique:books|max:255',
-            'authorName' => 'required|string|max:255',
+            'authorName' => 'string|max:255',
         ]);
         
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());       
         }
 
-        $author = $this->checkExistAuthor($input['authorName']);
-        if(!$author){
-            $author = Author::create($input);
+        if(isset($input['authorName'])){
+            $author = $this->checkExistAuthor($input['authorName']);
+            if(!$author){
+                $author = Author::create($input);
+            }
+            $book->authorId = $author->id;
         }
-        $book->name = $input['name'];
-        $book->authorId = $author->id;
+        $book->name = $input['name'];        
         $book->save();
    
         return $this->sendResponse(new BookResource($book), 'Book updated successfully.');

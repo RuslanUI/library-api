@@ -12,3 +12,6 @@ php artisan sail:install
 
 # Start project
 ./vendor/bin/sail up -d
+
+# Migration tables
+./vendor/bin/sail artisan migrate:refresh
