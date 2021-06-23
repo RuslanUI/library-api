@@ -61,7 +61,8 @@ PUT api/author/{id}?authorName=NewAuthor
 
 Удаление книги / автора 
 ```
-DELETE api/book/{id} api/author/{id}
+DELETE api/book/{id} 
+DELETE api/author/{id}
 ```
 
 Установка оценки книге / автору
